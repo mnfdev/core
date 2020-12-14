@@ -79,13 +79,14 @@ matrix:
         dist: trusty
         
 install:
-    - |
+#    - |
 #        INSTALL_DIR="${HOME}/depend"
 #        mkdir -p "${INSTALL_DIR}" "${INSTALL_DIR}/bin" "${INSTALL_DIR}/man" "${INSTALL_DIR}/share"
 #        if [ ! -x "${INSTALL_DIR}/bin/cmake" ]; then
 #            ${TRAVIS_BUILD_DIR}/depend/get_cmake.sh --prefix ${INSTALL_DIR}
 #        fi
 #        export PATH=${INSTALL_DIR}/bin:${PATH}
+    - |
         if [[ "$(uname -s)" == 'Darwin' ]]; then
             brew install pyenv-virtualenv
             if which pyenv > /dev/null; then
@@ -95,10 +96,11 @@ install:
             pyenv virtualenv 3.7.1 conan
             pyenv activate conan
         fi
-        pip install --upgrade cmake
         pip install --upgrade conan
-        cmake --version
         conan --version
+        pip install --upgrade cmake
+        cmake --version
+        rake --version
 
 before_script:
     - cd ${TRAVIS_BUILD_DIR}
