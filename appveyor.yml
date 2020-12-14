@@ -15,6 +15,9 @@ install:
   - set PATH=C:\Ruby25\bin;%PATH%
   - gem update --system
   - gem install rake -f -q
+  # Install conan
+  - set PATH=%PATH%;%PYTHON%/Scripts
+  - pip install conan --upgrade
 
 build_script:
 - cmd: >-
