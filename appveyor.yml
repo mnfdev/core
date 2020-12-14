@@ -18,8 +18,14 @@ install:
   # Install conan
   - set PYTHON=C:\Python38-x64
   - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+  - python --version
   - python -m pip install --upgrade pip wheel
+  - pip --version
   - pip install --upgrade conan
+  - conan --version
+  # Check versions
+  - rake --version
+  - cmake --version
 
 build_script:
 - cmd: >-
