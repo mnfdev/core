@@ -8,7 +8,15 @@ image:
   - Visual Studio 2015
   - Visual Studio 2017
 
+environment:
+  matrix:
+    - PYTHON: "C:\\Python38-x64"    # https://www.appveyor.com/docs/windows-images-software/#python
+
 install:
+  - set PATH=%PYTHON%\bin;%PYTHON%\Scripts;%PATH%
+  - python --version
+  - pip --version
+
   # As of June 2018, TLS 1.2 is required to connect to rubygems.org. The default ruby is 1.9.3 and doesn't support TLS 1.2.
   # https://github.com/rubygems/rubygems/issues/1912
   # https://help.appveyor.com/discussions/problems/15052-unable-to-download-data-from-httpsrubygemsorg
@@ -16,7 +24,6 @@ install:
   - gem update --system
   - gem install rake -f -q
   # Install conan
-  - set PATH=%PATH%;%PYTHON%/Scripts
   - pip install --upgrade pip
   - pip install --upgrade conan
   - cmake --version
