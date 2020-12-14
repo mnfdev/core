@@ -86,6 +86,16 @@ install:
             ${TRAVIS_BUILD_DIR}/depend/get_cmake.sh --prefix ${INSTALL_DIR}
         fi
         export PATH=${INSTALL_DIR}/bin:${PATH}
+        if [[ "$(uname -s)" == 'Darwin' ]]; then
+            brew install pyenv-virtualenv
+            if which pyenv > /dev/null; then
+                eval "$(pyenv init -)"
+            fi
+            pyenv install 3.7.1
+            pyenv virtualenv 3.7.1 conan
+            pyenv activate conan
+        fi
+        pip install conan --upgrade
 
 before_script:
     - cd ${TRAVIS_BUILD_DIR}
@@ -93,7 +103,12 @@ before_script:
     - export CC=${PSCC} CXX=${PSCXX}
 
 script:
-    - rake
+  - |
+    if [[ "$(uname -s)" == 'Darwin' ]]; then
+        if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+        pyenv activate conan
+    fi
+    rake
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) || true
