@@ -18,7 +18,9 @@ install:
   # Install conan
   - set PATH=%PATH%;%PYTHON%/Scripts
   - pip install --upgrade pip
-  - pip install conan --upgrade
+  - pip install --upgrade conan
+  - cmake --version
+  - conan --version
 
 build_script:
 - cmd: >-
