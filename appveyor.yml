@@ -17,6 +17,7 @@ install:
   - gem install rake -f -q
   # Install conan
   - set PATH=%PATH%;%PYTHON%/Scripts
+  - pip install --upgrade pip
   - pip install conan --upgrade
 
 build_script:
