@@ -88,14 +88,20 @@ install:
 #        export PATH=${INSTALL_DIR}/bin:${PATH}
     - |
         if [[ "$(uname -s)" == 'Darwin' ]]; then
+            brew update
+            brew outdated pyenv || brew upgrade pyenv
             brew install pyenv-virtualenv
             if which pyenv > /dev/null; then
                 eval "$(pyenv init -)"
             fi
-            pyenv install 3.7.1
-            pyenv virtualenv 3.7.1 conan
+            pyenv install 3.8.1
+            pyenv virtualenv 3.8.1 conan
+            pyenv rehash
             pyenv activate conan
         fi
+        python --version
+        pip install --upgrade pip
+        pip --version
         pip install --upgrade conan
         conan --version
         pip install --upgrade cmake
