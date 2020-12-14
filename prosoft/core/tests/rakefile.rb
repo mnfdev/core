@@ -63,7 +63,7 @@ end
 
 task :generate_release do
   CMAKE_GENERATORS.each do |gen|
-    builddir = build_dir(DEBUG_CONFIG, gen)
+    builddir = build_dir(RELEASE_CONFIG, gen)
     conan_args = ['install', '--install-folder', builddir, '--settings', 'build_type=Release']
     if gen.start_with?('Visual Studio ') and not gen.end_with?(' Win64')
         conan_args += ['--settings', 'arch=x86']
