@@ -12,10 +12,11 @@ install:
   - set PYTHON=C:\Python38-x64
   - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
   - python --version
-  - python -m pip install --upgrade pip
+  - python -m pip install --upgrade pip wheel
   - pip --version
   - pip install --upgrade conan
   - conan --version
+  - pip install --upgrade rake
   - rake --version
   - cmake --version
 
