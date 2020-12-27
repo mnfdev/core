@@ -18,10 +18,13 @@ matrix:
 install:
     - |
         echo "*** Check versions ***"
-        HOMEBREW_NO_AUTO_UPDATE=1 brew install python3
+        if [ "$TRAVIS_OSX_IMAGE" == "xcode9.2" ]; then
+            HOMEBREW_NO_AUTO_UPDATE=1 brew install python3
+            HOMEBREW_NO_AUTO_UPDATE=1 brew install cmake
+        fi
         python3 --version
         pip3 --version
-        pip3 install --upgrade conan
+        pip3 install conan
         conan --version
         cmake --version
         rake --version
