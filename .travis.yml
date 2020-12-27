@@ -18,6 +18,7 @@ matrix:
         addons:
             homebrew:
                 packages: python3
+                update: true    # fix "Error: Unknown command: bundle"
 
       # latest xcode for macOS 10.13
       - os: osx
