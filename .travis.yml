@@ -14,34 +14,11 @@ matrix:
         osx_image: xcode9.2
         compiler: clang
         env: PSCC=clang PSCXX=clang++
-
-      - os: osx
-        osx_image: xcode9.2
-        compiler: clang
-        env: PSCC=clang PSCXX=clang++
-        language: generic
-        python: 3.5
-
-      - os: osx
-        osx_image: xcode9.2
-        compiler: clang
-        env: PSCC=clang PSCXX=clang++
-        language: generic
-        python: 3.6
-
-      - os: osx
-        osx_image: xcode9.2
-        compiler: clang
-        env: PSCC=clang PSCXX=clang++
-        language: generic
-        python: 3.7
-
         
 install:
     - |
         echo "*** Check versions ***"
-        find / -name "python*" 2>/dev/null
-        find / -name "pip*" 2>/dev/null
+        brew install python3
         python3 --version
         pip3 --version
         pip3 install --upgrade conan
