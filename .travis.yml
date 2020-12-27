@@ -87,6 +87,10 @@ install:
 #        fi
 #        export PATH=${INSTALL_DIR}/bin:${PATH}
     - |
+        echo "*** Check versions ***"
+        python --version
+        pip --version
+        pip3 --version
         if [[ "$(uname -s)" == 'Darwin' ]]; then
             brew update
             brew outdated pyenv || brew upgrade pyenv
