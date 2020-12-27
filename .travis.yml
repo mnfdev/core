@@ -9,30 +9,29 @@ cache:
 
 matrix:
     include:
-        # macOS
+      # latest xcode for macOS 10.12
       - os: osx
-        osx_image: xcode7.3
+        osx_image: xcode9.2
         compiler: clang
         env: PSCC=clang PSCXX=clang++
-        addons:
-            homebrew:
-                packages: python3
 
+      # latest xcode for macOS 10.13
       - os: osx
-        osx_image: xcode8.3
+        osx_image: xcode10.1
         compiler: clang
         env: PSCC=clang PSCXX=clang++
-        addons:
-            homebrew:
-                packages: python3
 
+      # latest xcode for macOS 10.14
       - os: osx
-        osx_image: xcode9.4
+        osx_image: xcode11.3
         compiler: clang
         env: PSCC=clang PSCXX=clang++
-        addons:
-            homebrew:
-                packages: python3
+
+      # latest xcode for macOS 10.15
+      - os: osx
+        osx_image: xcode12.2
+        compiler: clang
+        env: PSCC=clang PSCXX=clang++
 
         # Linux
         # Containers are disabled because the filesystem iterator tests are failing inexplicably.
@@ -66,7 +65,7 @@ matrix:
         env: PSCC=gcc-5 PSCXX=g++-5
         sudo: required
         dist: trusty
-        
+
       - os: linux
         compiler: gcc
         addons: &gcc6
@@ -97,27 +96,10 @@ install:
 #        export PATH=${INSTALL_DIR}/bin:${PATH}
     - |
         echo "*** Check versions ***"
-        python --version
-        pip --version
+        python3 --version
         pip3 --version
-        if [[ "$(uname -s)" == 'Darwin' ]]; then
-            brew update
-            brew outdated pyenv || brew upgrade pyenv
-            brew install pyenv-virtualenv
-            if which pyenv > /dev/null; then
-                eval "$(pyenv init -)"
-            fi
-            pyenv install 3.8.1
-            pyenv virtualenv 3.8.1 conan
-            pyenv rehash
-            pyenv activate conan
-        fi
-        python --version
-        pip install --upgrade pip
-        pip --version
-        pip install --upgrade conan
+        pip3 install --upgrade conan
         conan --version
-        pip install --upgrade cmake
         cmake --version
         rake --version
 
@@ -128,11 +110,6 @@ before_script:
 
 script:
   - |
-    if [[ "$(uname -s)" == 'Darwin' ]]; then
-        if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-        pyenv activate cmake
-        pyenv activate conan
-    fi
     rake
 
 after_success:
