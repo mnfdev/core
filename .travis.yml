@@ -14,93 +14,34 @@ matrix:
         osx_image: xcode9.2
         compiler: clang
         env: PSCC=clang PSCXX=clang++
-        language: sh
-        addons:
-            homebrew:
-                packages: python3
-                update: true    # fix "Error: Unknown command: bundle"
 
-      # latest xcode for macOS 10.13
       - os: osx
-        osx_image: xcode10.1
+        osx_image: xcode9.2
         compiler: clang
         env: PSCC=clang PSCXX=clang++
+        language: generic
+        python: 3.5
 
-      # latest xcode for macOS 10.14
       - os: osx
-        osx_image: xcode11.3
+        osx_image: xcode9.2
         compiler: clang
         env: PSCC=clang PSCXX=clang++
+        language: generic
+        python: 3.6
 
-      # latest xcode for macOS 10.15
       - os: osx
-        osx_image: xcode12.2
+        osx_image: xcode9.2
         compiler: clang
         env: PSCC=clang PSCXX=clang++
+        language: generic
+        python: 3.7
 
-        # Linux
-        # Containers are disabled because the filesystem iterator tests are failing inexplicably.
-        # Perhaps something to do with AUFS.
-        # However I did download the docker instance and run the tests manually and they passed.
-      - os: linux
-        compiler: gcc
-        addons: &gcc48
-            apt:
-                sources: ['ubuntu-toolchain-r-test']
-                packages: ['gcc-4.8', 'g++-4.8', 'libacl1-dev']
-        env: PSCC=gcc-4.8 PSCXX=g++-4.8
-        sudo: required
-
-      - os: linux
-        compiler: gcc
-        addons: &gcc49
-            apt:
-                sources: ['ubuntu-toolchain-r-test']
-                packages: ['gcc-4.9', 'g++-4.9', 'libacl1-dev']
-        env: PSCC=gcc-4.9 PSCXX=g++-4.9
-        dist: trusty
-        sudo: required
-
-      - os: linux
-        compiler: gcc
-        addons: &gcc5
-            apt:
-                sources: ['ubuntu-toolchain-r-test']
-                packages: ['gcc-5', 'g++-5', 'libacl1-dev']
-        env: PSCC=gcc-5 PSCXX=g++-5
-        sudo: required
-        dist: trusty
-
-      - os: linux
-        compiler: gcc
-        addons: &gcc6
-            apt:
-                sources: ['ubuntu-toolchain-r-test']
-                packages: ['gcc-6', 'g++-6', 'libacl1-dev']
-        env: PSCC=gcc-6 PSCXX=g++-6
-        sudo: required
-        dist: trusty
-
-      - os: linux
-        compiler: gcc
-        addons: &gcc7
-            apt:
-                sources: ['ubuntu-toolchain-r-test']
-                packages: ['gcc-7', 'g++-7', 'libacl1-dev']
-        env: PSCC=gcc-7 PSCXX=g++-7
-        sudo: required
-        dist: trusty
         
 install:
-#    - |
-#        INSTALL_DIR="${HOME}/depend"
-#        mkdir -p "${INSTALL_DIR}" "${INSTALL_DIR}/bin" "${INSTALL_DIR}/man" "${INSTALL_DIR}/share"
-#        if [ ! -x "${INSTALL_DIR}/bin/cmake" ]; then
-#            ${TRAVIS_BUILD_DIR}/depend/get_cmake.sh --prefix ${INSTALL_DIR}
-#        fi
-#        export PATH=${INSTALL_DIR}/bin:${PATH}
     - |
         echo "*** Check versions ***"
+        find / -name "python*" 2>/dev/null
+        find / -name "pip*" 2>/dev/null
         python3 --version
         pip3 --version
         pip3 install --upgrade conan
