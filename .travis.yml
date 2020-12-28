@@ -33,58 +33,20 @@ matrix:
         compiler: clang
         env: PSCC=clang PSCXX=clang++
 
-        # Linux
-        # Containers are disabled because the filesystem iterator tests are failing inexplicably.
-        # Perhaps something to do with AUFS.
-        # However I did download the docker instance and run the tests manually and they passed.
+      # latest gcc for Ubuntu Trusty
       - os: linux
-        compiler: gcc
-        addons: &gcc48
-            apt:
-                sources: ['ubuntu-toolchain-r-test']
-                packages: ['gcc-4.8', 'g++-4.8', 'libacl1-dev']
-        env: PSCC=gcc-4.8 PSCXX=g++-4.8
-        sudo: required
-
-      - os: linux
-        compiler: gcc
-        addons: &gcc49
-            apt:
-                sources: ['ubuntu-toolchain-r-test']
-                packages: ['gcc-4.9', 'g++-4.9', 'libacl1-dev']
-        env: PSCC=gcc-4.9 PSCXX=g++-4.9
         dist: trusty
-        sudo: required
+        env: PSCC=gcc PSCXX=g++
 
+      # latest gcc for Ubuntu Xenial
       - os: linux
-        compiler: gcc
-        addons: &gcc5
-            apt:
-                sources: ['ubuntu-toolchain-r-test']
-                packages: ['gcc-5', 'g++-5', 'libacl1-dev']
-        env: PSCC=gcc-5 PSCXX=g++-5
-        sudo: required
-        dist: trusty
+        dist: xenial
+        env: PSCC=gcc PSCXX=g++
 
+      # latest gcc for Ubuntu Bionic
       - os: linux
-        compiler: gcc
-        addons: &gcc6
-            apt:
-                sources: ['ubuntu-toolchain-r-test']
-                packages: ['gcc-6', 'g++-6', 'libacl1-dev']
-        env: PSCC=gcc-6 PSCXX=g++-6
-        sudo: required
-        dist: trusty
-
-      - os: linux
-        compiler: gcc
-        addons: &gcc7
-            apt:
-                sources: ['ubuntu-toolchain-r-test']
-                packages: ['gcc-7', 'g++-7', 'libacl1-dev']
-        env: PSCC=gcc-7 PSCXX=g++-7
-        sudo: required
-        dist: trusty
+        dist: bionic
+        env: PSCC=gcc PSCXX=g++
         
 install:
 #    - |
