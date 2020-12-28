@@ -14,11 +14,6 @@ matrix:
         osx_image: xcode9.2
         compiler: clang
         env: PSCC=clang PSCXX=clang++
-        language: sh
-        addons:
-            homebrew:
-                packages: python3
-                update: true    # fix "Error: Unknown command: bundle"
 
       # latest xcode for macOS 10.13
       - os: osx
@@ -100,11 +95,14 @@ install:
 #        fi
 #        export PATH=${INSTALL_DIR}/bin:${PATH}
     - |
-        echo "*** Check versions ***"
+        if [ "$TRAVIS_OSX_IMAGE" == "xcode9.2" ]; then
+            HOMEBREW_NO_AUTO_UPDATE=1 brew install python3
+        fi
         python3 --version
         pip3 --version
         pip3 install --upgrade conan
         conan --version
+        # check versions
         cmake --version
         rake --version
 
