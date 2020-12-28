@@ -16,12 +16,12 @@ install:
   #- set PATH=C:\Ruby25\bin;%PATH%
   #- gem update --system
   #- gem install rake -f -q
-  # chec quick rake install
+  # check quick rake install
   - set PATH=C:\Ruby25-x64\bin;%PATH%
   - ruby --version
   - rake --version
-  - gem install rake
-  - rake --version
+  # - gem install rake - check - no update
+  #- rake --version
   # Install conan
   - set PYTHON=C:\Python38-x64
   - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
