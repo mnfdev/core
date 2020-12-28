@@ -17,7 +17,8 @@ install:
   #- gem update --system
   #- gem install rake -f -q
   # chec quick rake install
-  - set PATH=C:\Ruby27-x64\bin;%PATH%
+  - set PATH=C:\Ruby25-x64\bin;%PATH%
+  - ruby --version
   - rake --version
   - gem install rake
   - rake --version
